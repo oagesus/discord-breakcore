@@ -1,0 +1,7 @@
+services:
+  discord-bot:
+    image: oagesus/discord-breakcore:latest
+    build: .
+    env_file:
+      - .env
+    restart: unless-stopped
