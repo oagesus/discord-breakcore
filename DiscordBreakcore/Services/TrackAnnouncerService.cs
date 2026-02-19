@@ -56,7 +56,7 @@ public class TrackAnnouncerService : IHostedService
                 ? track.Duration.ToString(@"h\:mm\:ss")
                 : track.Duration.ToString(@"mm\:ss");
 
-            await channel.SendMessageAsync($"Now playing: **{track.Title}** [{duration}]");
+            await channel.SendMessageAsync($"Now playing: **[{track.Title}]({track.Uri})** [{duration}]");
         }
         catch (Exception ex)
         {

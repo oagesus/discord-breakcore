@@ -90,7 +90,7 @@ public class MusicModule : InteractionModuleBase<SocketInteractionContext>
             }
             else
             {
-                await FollowupAsync($"Queued **{tracks.Length}** tracks from **{playlistName}**");
+                await FollowupAsync($"Queued **{tracks.Length}** tracks from **{playlistName}** (Position: {position}-{position + queued})");
             }
         }
         else
@@ -111,7 +111,7 @@ public class MusicModule : InteractionModuleBase<SocketInteractionContext>
             }
             else
             {
-                await FollowupAsync($"**{track.Title}** [{FormatDuration(track.Duration)}] added to queue (Position: {position})");
+                await FollowupAsync($"**[{track.Title}]({track.Uri})** [{FormatDuration(track.Duration)}] added to queue (Position: {position})");
             }
         }
     }
@@ -175,13 +175,13 @@ public class MusicModule : InteractionModuleBase<SocketInteractionContext>
         {
             var pos = player.Position?.Position ?? TimeSpan.Zero;
             var dur = player.CurrentTrack.Duration;
-            embed.AddField($"0. {player.CurrentTrack.Title}", $"Duration: {FormatDuration(pos)}/{FormatDuration(dur)}");
+            embed.AddField($"0. {player.CurrentTrack.Title}", $"{player.CurrentTrack.Uri}\nDuration: {FormatDuration(pos)}/{FormatDuration(dur)}");
         }
 
         var items = queue.Take(10).ToList();
         for (int i = 0; i < items.Count; i++)
         {
-            embed.AddField($"{i + 1}. {items[i].Track!.Title}", $"Duration: {FormatDuration(items[i].Track!.Duration)}");
+            embed.AddField($"{i + 1}. {items[i].Track!.Title}", $"{items[i].Track!.Uri}\nDuration: {FormatDuration(items[i].Track!.Duration)}");
         }
 
         if (queue.Count > 10)
