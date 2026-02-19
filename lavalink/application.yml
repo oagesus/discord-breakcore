@@ -1,0 +1,38 @@
+server:
+  port: 2333
+  address: 0.0.0.0
+
+lavalink:
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.17.0"
+      repository: "https://maven.lavalink.dev/releases"
+  server:
+    password: "breakcore-secret"
+    sources:
+      youtube: false
+      bandcamp: true
+      soundcloud: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+
+plugins:
+  youtube:
+    enabled: true
+    clients:
+      - MUSIC
+      - ANDROID_VR
+      - WEB
+    oauth:
+      enabled: true
+      refreshToken: ${LAVALINK_OAUTH_REFRESH_TOKEN}
+    remoteCipher:
+      url: "https://cipher.kikkia.dev/"
+      userAgent: "breakcore-bot"
+
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
+    dev.lavalink.youtube.http.YoutubeOauth2Handler: INFO

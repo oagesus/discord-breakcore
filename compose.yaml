@@ -4,4 +4,20 @@ services:
     build: .
     env_file:
       - .env
+    depends_on:
+      lavalink:
+        condition: service_healthy
     restart: unless-stopped
+
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4
+    env_file:
+      - .env
+    volumes:
+      - ./lavalink/application.yml:/opt/Lavalink/application.yml
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--header", "Authorization: breakcore-secret", "-qO-", "http://localhost:2333/version"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
