@@ -57,7 +57,11 @@ public class MusicModule : InteractionModuleBase<SocketInteractionContext>
         var guild = Context.Guild as SocketGuild;
         if (guild != null)
         {
-            await guild.CurrentUser.ModifyAsync(x => x.Deaf = true);
+            try
+            {
+                await guild.CurrentUser.ModifyAsync(x => x.Deaf = true);
+            }
+            catch { }
         }
 
         var loadResult = await _audio.Tracks.LoadTracksAsync(query, TrackSearchMode.YouTube);
