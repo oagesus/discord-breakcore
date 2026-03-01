@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
 
   lavalink:
-    image: ghcr.io/lavalink-devs/lavalink:4
+    image: ghcr.io/lavalink-devs/lavalink:4.0.8
     env_file:
       - .env
     volumes:
