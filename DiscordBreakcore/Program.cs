@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices((context, services) =>
+    .ConfigureServices((_, services) =>
     {
         services.AddSingleton(new DiscordSocketConfig
         {
@@ -25,12 +25,8 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddLavalink();
         services.ConfigureLavalink(config =>
         {
-            var lavalinkHost = context.Configuration["LAVALINK_HOST"] ?? "lavalink";
-            var lavalinkPort = context.Configuration["LAVALINK_PORT"] ?? "2333";
-            var lavalinkPassword = context.Configuration["LAVALINK_PASSWORD"] ?? "breakcore-secret";
-
-            config.BaseAddress = new Uri($"http://{lavalinkHost}:{lavalinkPort}");
-            config.Passphrase = lavalinkPassword;
+            config.BaseAddress = new Uri("http://lavalink:2333");
+            config.Passphrase = "breakcore-secret";
         });
     })
     .Build();
