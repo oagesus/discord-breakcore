@@ -22,11 +22,16 @@ plugins:
     enabled: true
     clients:
       - MUSIC
-      - ANDROID_VR
       - WEB
+      - WEBEMBEDDED
+      - TV
+      - ANDROID_VR
     oauth:
       enabled: true
       refreshToken: ${LAVALINK_OAUTH_REFRESH_TOKEN}
+    pot:
+      token: ${LAVALINK_PO_TOKEN}
+      visitorData: ${LAVALINK_PO_VISITOR_DATA}
     remoteCipher:
       url: "https://cipher.kikkia.dev/"
       userAgent: "breakcore-bot"
